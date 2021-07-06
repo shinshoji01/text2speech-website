@@ -1,0 +1,7 @@
+__pycache__/
+.ipynb_checkpoints/
+db/
+php/file/audio/
+*wav
+*pth
+python/file/cache/
