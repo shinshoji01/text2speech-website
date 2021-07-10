@@ -18,4 +18,4 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/shinshoji01/text2speech-
 ```
 ## Build a website
 1. `docker-compose up -d --build`
-2. go to *localhost:8085/index.php*
+2. go to http://localhost:8085/index.php.
