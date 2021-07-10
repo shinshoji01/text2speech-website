@@ -9,7 +9,8 @@
 Introduction
 </h1>
 <p> 
-This website contains the demo of a text-to-speech conversion system using deeplearning models: Tacotron2 and WaveGlow.
+<?php $intro = "This website contains the demo of a text-to-speech conversion system using deeplearning models, including Tacotron2 and WaveGlow."?>
+<?php echo $intro ?>
 </p>
 <form action="main.php" method="POST">
 <div class="wrapper">
@@ -30,23 +31,21 @@ This website contains the demo of a text-to-speech conversion system using deepl
     <div> 
         <?php
         if (!isset($_POST['generate'])){
-            $text = "shoshoinoue";
-            $filename = text2filename($text);
-            echo "<center><font size='5' face='ＭＳ ゴシック'> ".$text." </font></center>";
-            displayAudio($filename);
+            #echo "<center><font size='5' face='ＭＳ ゴシック'> ".$text." </font></center>";
+            displayAudio($intro);
         }
         ?>
         <?php
         if (isset($_POST['generate'])){
             $text = $_POST["textfile"];
-            echo "<center>".$text."</center>";
+            echo "<center><font size='5' face='ＭＳ ゴシック'> ".$text." </font></center>";
             echo "<br>";
             $filename = text2filename($text);
             $found = findAudio($filename);
             if(!$found){ # no file in the database
                 #echo "getting data";
                 #echo $text;
-                $cmd = "sudo docker exec -it network-lesson_python_1 python3 /work/get_audio.py --text "."'".$text."'";
+                $cmd = "sudo docker exec -it python_container python3 /work/get_audio.py --text "."'".$text."'";
                 exec($cmd);
                 #exec($cmd, $opt, $status);
                 #$opt;
@@ -61,7 +60,7 @@ This website contains the demo of a text-to-speech conversion system using deepl
             #echo $_POST['textfile'];
             displayAudio($text);
         }
-        ?>
+       ?>
 
         <p> <img src="./images/singing_colored.png" alt="singing" title="singing" width="200"> </p>
         
@@ -85,7 +84,7 @@ This website contains the demo of a text-to-speech conversion system using deepl
     </div>
     <div>
         <div class=area>
-        <?php displayAudio(text2filename($text))?>
+        <?php displayAudio($text)?>
         </div>
     </div>
     <!-- 2nd example-->
@@ -103,7 +102,7 @@ This website contains the demo of a text-to-speech conversion system using deepl
     </div>
     <div>
         <div class=area>
-        <?php displayAudio(text2filename($text))?>
+        <?php displayAudio($text)?>
         </div>
     </div>
     <!-- 3rd example-->
@@ -121,12 +120,12 @@ This website contains the demo of a text-to-speech conversion system using deepl
     </div>
     <div>
         <div class=area>
-        <?php displayAudio(text2filename($text))?>
+        <?php displayAudio($text)?>
         </div>
     </div>
     <!-- 4th example-->
     <div>
-        <?php $text = "A recent innivation that helps people in the world." ?>
+        <?php $text = "A recent innovation that helps people in the world." ?>
         <br>
         <div class=area>
             <?php echo "<p><font size='5' face='ＭＳ ゴシック'>".$text."</font></p>"?>
@@ -139,7 +138,7 @@ This website contains the demo of a text-to-speech conversion system using deepl
     </div>
     <div>
         <div class=area>
-        <?php displayAudio(text2filename($text))?>
+        <?php displayAudio($text)?>
         </div>
     </div>
 </div>
@@ -151,7 +150,7 @@ This website contains the demo of a text-to-speech conversion system using deepl
 <?php
 function text2filename($text)
 {
-    $dir='audio/';
+    $dir='./audio/';
     $filename = strtolower($text);
     $filename = str_replace(" ", "_", $filename);
     $filename = $dir.$filename.".wav";

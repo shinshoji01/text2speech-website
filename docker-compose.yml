@@ -4,7 +4,7 @@ services:
   web:
     build: ./php/docker/
     ports:
-      - 81:80
+      - 8085:80
     volumes:
       - "./php/file/:/var/www/html/"
       - "/var/run/docker.sock:/var/run/docker.sock"
@@ -19,14 +19,15 @@ services:
 
   python:
     build: ./python/docker/
+    container_name: python_container
     volumes:
       - "./python/file/:/work/"
-      - "./php/file/audio/:/work/audio/"
+      - "./php/file/audio/:/work_php/audio/"
       - "./python/file/cache/nvidia_DeepLearningExamples_torchhub/:/root/.cache/torch/hub/nvidia_DeepLearningExamples_torchhub/"
       - "./python/file/cache/NVIDIA_DeepLearningExamples_torchhub/:/root/.cache/torch/hub/NVIDIA_DeepLearningExamples_torchhub/"
-        #runtime: nvidia
-        #environment:
-        #- NVIDIA_VISIBLE_DEVICES=all
+    runtime: nvidia
+    environment:
+        - NVIDIA_VISIBLE_DEVICES=all
     tty: true
     stdin_open: true
 

@@ -10,7 +10,7 @@ def main():
 
     parser.add("--text", type=str, required=True, help="text that you like to convert")
     parser.add("--rate", type=int, default=22050, help="sample rate")
-    parser.add("--save_dir", type=str, default="/work/audio/")
+    parser.add("--save_dir", type=str, default="/work_php/audio/")
     parser.add("--waveglow_param_dir", type=str, default="/work/parameters/")
     args = parser.parse_args()
     text = args.text
